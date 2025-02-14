@@ -176,8 +176,8 @@ function Shop() {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Shop & Inventory</h1>
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-0">Shop & Inventory</h1>
         <button
           onClick={() => setShowAddItemDialog(true)}
           className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
@@ -204,49 +204,51 @@ function Shop() {
       </div>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                ITEM
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                PRICE
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                AVAILABLE
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                QUANTITY
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {inventory.map((item) => (
-              <tr key={item.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{item.item_name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">₹{item.price}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{item.quantity}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <input
-                    type="number"
-                    min="0"
-                    max={item.quantity}
-                    value={quantities[item.id] || 0}
-                    onChange={(e) => setQuantities({
-                      ...quantities,
-                      [item.id]: parseInt(e.target.value) || 0
-                    })}
-                    className="w-20 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  ITEM
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  PRICE
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  AVAILABLE
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  QUANTITY
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {inventory.map((item) => (
+                <tr key={item.id}>
+                  <td className="px-4 py-4 whitespace-nowrap">{item.item_name}</td>
+                  <td className="px-4 py-4 whitespace-nowrap">₹{item.price}</td>
+                  <td className="px-4 py-4 whitespace-nowrap">{item.quantity}</td>
+                  <td className="px-4 py-4 whitespace-nowrap">
+                    <input
+                      type="number"
+                      min="0"
+                      max={item.quantity}
+                      value={quantities[item.id] || 0}
+                      onChange={(e) => setQuantities({
+                        ...quantities,
+                        [item.id]: parseInt(e.target.value) || 0
+                      })}
+                      className="w-20 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div className="flex items-center space-x-4 mb-6">
+      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
         <label className="flex items-center space-x-2">
           <input
             type="radio"
